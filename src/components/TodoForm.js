@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { v4 as uuid } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
+import { Button, TextField } from '@material-ui/core';
 
 // add addTodo props (HTML-like prop)
 function TodoForm({ addTodo }) {
@@ -25,7 +26,7 @@ function TodoForm({ addTodo }) {
         // trimming the unnecessary white spaces on both sides of the string
         // if todo.task is not empty - there is a description of task
         if (todo.task.trim()) {
-            addTodo({ ...todo, id: uuid });
+            addTodo({ ...todo, id: uuidv4() });
             //reset task input
             setTodo({ ...todo, task: "" });
         }
@@ -33,14 +34,15 @@ function TodoForm({ addTodo }) {
 
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
+        <form className="todo-form" onSubmit={handleSubmit}>
+            <TextField
+                label="Task"
                 name="task"
                 type="text"
                 value={todo.task}
                 onChange={handleTaskInputChange}
             />
-            <button type="submit" >Submit</button>
+            <Button type="submit" >Submit</Button>
         </form>
     )
 
